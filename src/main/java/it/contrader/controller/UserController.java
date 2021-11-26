@@ -29,17 +29,10 @@ public class UserController {
 			UserDTO userDTO = service.findByUsernameAndPassword(username, password);
 			request.getSession().setAttribute("user", userDTO);
 
-			switch (userDTO.getUsertype()) {
 
-			case "ADMIN":
-				return "homeadmin";
-
-			case "USER":
-				return "homeuser";
-
-			default:
-				return "index";
-			}
+			return "home";
+			
+			
 		}catch (Exception e) {
 			return "index";
 		}
@@ -52,27 +45,26 @@ public class UserController {
 	}
 
 	@GetMapping("/delete")
-	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String delete(HttpServletRequest request, @RequestParam("id") int id) {
 		service.delete(id);
 		setAll(request);
 		return "users";
 	}
 
 	@GetMapping("/preupdate")
-	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String preUpdate(HttpServletRequest request, @RequestParam("id") int id) {
 		request.getSession().setAttribute("dto", service.read(id));
 		return "updateuser";
 	}
 
 	@PostMapping("/update")
-	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("username") String username,
+	public String update(HttpServletRequest request, @RequestParam("id") int id, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("usertype") String usertype) {
 
 		UserDTO dto = new UserDTO();
 		dto.setIduser(id);
 		dto.setUsername(username);
 		dto.setPassword(password);
-		dto.setUsertype(usertype);
 		service.update(dto);
 		setAll(request);
 		return "users";
@@ -80,7 +72,7 @@ public class UserController {
 	}
 
 	@GetMapping("/register")
-	public String preInsert(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String preInsert(HttpServletRequest request, @RequestParam("id") int id) {
 		request.getSession().setAttribute("dto", service.read(id));
 		return "registrati";
 	}
@@ -94,7 +86,6 @@ public class UserController {
 		UserDTO dto = new UserDTO();
 		dto.setUsername(username);
 		dto.setPassword(password);
-		dto.setUsertype("USER");
 		service.insert(dto);
 		setAll(request);
 		} catch (Exception e) {
@@ -106,7 +97,7 @@ public class UserController {
 	}
 
 	@GetMapping("/read")
-	public String read(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String read(HttpServletRequest request, @RequestParam("id") int id) {
 		request.getSession().setAttribute("dto", service.read(id));
 		return "readuser";
 	}

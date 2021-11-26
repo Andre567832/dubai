@@ -1,6 +1,8 @@
 package it.contrader.model;
 
-import javax.persistence.Column;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,15 +16,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class User {
-
+public class Parametro {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int iduser;
-
-	@Column(unique = true)
-	private String username;
-
-	private String password;
-
+	private int idparametro;
+	
+	private double peso;
+	private int battito;
+	private int saturazione;
+	private double temperatura;
+	private double stress;
+	private LocalDate data;
+	private LocalTime ora;
+	private int idbambino;
 }
