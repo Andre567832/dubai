@@ -17,8 +17,8 @@ public class BambinoService extends AbstractService<Bambino, BambinoDTO> {
 	@Autowired
 	private BambinoRepository repository;
 	
-	public BambinoDTO findByIduser(int id) {
-		return converter.toDTO(repository.findByIduser(id));
+	public BambinoDTO findByIduser(int iduser) {
+		return converter.toDTO(repository.findByIduser(iduser));
 	}
 	
 }
