@@ -21,6 +21,10 @@ import it.contrader.dto.UserDTO;
 import it.contrader.service.BambinoService;
 import it.contrader.service.ParametroService;
 
+
+/**
+ * @author Edoardo Rosiello
+ */
 @Controller
 @RequestMapping("/parametro")
 public class ParametroController {
