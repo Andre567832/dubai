@@ -1,5 +1,10 @@
 package it.contrader.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Random;
+import java.util.stream.DoubleStream;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +32,53 @@ public class ParametroController {
 	
 	private ParametroDTO rilevazione(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		
+		Random r = new Random();
+	//	r.doubles(3.5, 4.5);
+		double peso = r.nextDouble() + 2.5 + r.nextDouble();
+		int battito = r.nextInt(150) + 50;
+		int saturazione = r.nextInt(10) + 90;
+		double temperatura = r.nextInt(4) + 34;
+		boolean pannolino = r.nextInt(4) > 2;
+		double stress;
+		controllastress(request, battito, saturazione, temperatura, pannolino);
+		LocalDate data = LocalDate.now();
+		LocalTime time = LocalTime.now();
 		return new ParametroDTO();
 	}
 	
 	
+	private void controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
+		int g =0;
+		if (!checkbattiti(request, battito)) g++;
+		if(!checkpannolino(request, pannolino)) g++;
+		if(!checktemperatura(request, temperatura)) g++;
+		if(!checksaturazione(request, saturazione)) g++;
+		
+		double stress;
+		Random r = new Random();
+		switch(g) {
+		
+		
+		case 1:
+			stress = r.nextDouble()*40;
+			break;
+		case 2:
+			stress = r.nextDouble()*70;
+			break;
+		case 3:
+			stress = r.nextDouble()*90;
+			break;
+		case 4:
+			stress = r.nextDouble()*100;
+			break;
+			
+		default:
+			stress = 0;
+			break;
+		}
+	}
+
+
 	@GetMapping("/nomemancante")
 	public String read(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		request.getSession().setAttribute("dto", service.read(idbambino));
@@ -61,24 +109,31 @@ public class ParametroController {
 		return "readbambino";
 	}
 	
-	private void checktemperaturaesterna(HttpServletRequest request, double temperaturaest) {
+	private boolean checktemperaturaesterna(HttpServletRequest request, double temperaturaest) {
 		if(temperaturaest < 10) {
 			request.getSession().setAttribute("alerttemp", "L'ambiente è troppo freddo");
+			return false;
 		} else if(temperaturaest  > 20) {
 			request.getSession().setAttribute("alerttemp", "L'ambiente è troppo caldo");
+			return false;
 		}
+		else return true;
 	}
 	
-	private void checksaturazione(HttpServletRequest request, double saturazione) {
+	private boolean checksaturazione(HttpServletRequest request, double saturazione) {
 		if(saturazione < 94.1) {
 			request.getSession().setAttribute("alertsaturazione", "Saturazione bassa, controlla se il bambino sta respirando!!");
+			return false;
 		} 
+		return true;
 	}
 
-	private void checkpannolino(HttpServletRequest request, boolean pannolino) {
+	private boolean checkpannolino(HttpServletRequest request, boolean pannolino) {
 		if(pannolino) {
 			request.getSession().setAttribute("alert", "Il pannolino va cambiato");
+			return false;
 		} 
+		return true;
 	}
 
 	@GetMapping("/getbattiti")
@@ -96,22 +151,28 @@ public class ParametroController {
 		return "readbambino";
 	}
 	
-	private void checkbattiti(HttpServletRequest request, int battiti) {
+	private boolean checkbattiti(HttpServletRequest request, int battiti) {
 		if(battiti < 85) {
 			request.getSession().setAttribute("alertbattiti", "La frequenza cardiaca è troppo bassa");
+			return false;
 		} else if(battiti > 170) {
 			request.getSession().setAttribute("alertbattiti", "La frequenza cardiaca è troppo alta");
+			return false;
 		}
+		return true;
 	}
 
 
 
-	private void checktemperatura(HttpServletRequest request, double temperatura) {
+	private boolean checktemperatura(HttpServletRequest request, double temperatura) {
 		if(temperatura < 35) {
 			request.getSession().setAttribute("alertclima", "La temperatura è troppo bassa");
+			return false;
 		} else if(temperatura > 37) {
 			request.getSession().setAttribute("alertclima", "La temperatura è troppo alta, il bambino ha la febbre");
+			return false;
 		}
+		return true;
 	}
 
 
