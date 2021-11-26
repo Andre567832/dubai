@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import it.contrader.dto.UserDTO;
+import it.contrader.service.BambinoService;
 import it.contrader.service.UserService;
 
 @Controller
@@ -20,6 +21,8 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	@Autowired
+	private BambinoService bambinoservice;
 
 	@PostMapping("/login")
 	public String login(HttpServletRequest request, @RequestParam(value = "username", required = true) String username,
@@ -28,6 +31,8 @@ public class UserController {
 
 			UserDTO userDTO = service.findByUsernameAndPassword(username, password);
 			request.getSession().setAttribute("user", userDTO);
+			
+			request.getSession().setAttribute("list", bambinoservice.findByIduser(userDTO.getIduser()));
 
 
 			return "home";

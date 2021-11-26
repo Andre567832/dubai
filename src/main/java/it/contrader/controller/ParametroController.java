@@ -53,7 +53,7 @@ public class ParametroController {
 	
 	private void controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
 		int g =0;
-		if (!checkbattiti(request, battito)) g++;
+		if(!checkbattiti(request, battito)) g++;
 		if(!checkpannolino(request, pannolino)) g++;
 		if(!checktemperatura(request, temperatura)) g++;
 		if(!checksaturazione(request, saturazione)) g++;
