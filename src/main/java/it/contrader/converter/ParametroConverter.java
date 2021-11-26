@@ -21,7 +21,7 @@ public class ParametroConverter extends AbstractConverter<Parametro, ParametroDT
 	}
 
 	@Override
-	public ParametroDTO toDTO( Parametro parametro) {
+	public ParametroDTO toDTO(Parametro parametro) {
 		ParametroDTO parametroDTO = null;
 		if (parametro != null) {
 			parametroDTO = new ParametroDTO(parametro.getIdparametro(), parametro.getPeso(),
