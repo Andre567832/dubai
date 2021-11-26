@@ -12,7 +12,7 @@ import it.contrader.converter.Converter;
 public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
 
 	@Autowired
-	protected CrudRepository<Entity, Long> crudRepository;
+	protected CrudRepository<Entity, Integer> crudRepository;
 	@Autowired
 	protected Converter<Entity, DTO> converter;
 
@@ -31,7 +31,7 @@ public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
 
 	@Override
 	public DTO read(long id) {
-		return converter.toDTO(crudRepository.findById(id).get());
+		return converter.toDTO(crudRepository.findById((int) id).get());
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
 
 	@Override
 	public void delete(long id) {
-		crudRepository.deleteById(id);
+		crudRepository.deleteById((int) id);
 	}
 
 }
