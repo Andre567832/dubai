@@ -1,5 +1,7 @@
 package it.contrader.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +14,6 @@ import it.contrader.model.Parametro;
 public interface ParametroRepository extends CrudRepository<Parametro, Integer> {
 
 	Parametro findByIdparametro(int idparametro);
-	Parametro findByIdbambino(int idbambino);
+	List<Parametro> findByIdbambino(int idbambino);
 
 }
