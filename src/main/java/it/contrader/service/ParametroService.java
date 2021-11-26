@@ -1,5 +1,7 @@
 package it.contrader.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class ParametroService extends AbstractService<Parametro, ParametroDTO> {
 	@Autowired
 	private ParametroRepository repository;
 	
-	public ParametroDTO findByIdbambino(int id) {
-		return converter.toDTO(repository.findByIdbambino(id));
+	public List<ParametroDTO> findByIdbambino(int id) {
+		return converter.toDTOList(repository.findByIdbambino(id));
 	}
 }
