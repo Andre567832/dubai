@@ -5,12 +5,13 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import it.contrader.model.User;
+import it.contrader.model.Parametro;
 
 @Repository
 @Transactional
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface ParametroRepository extends CrudRepository<Parametro, Integer> {
 
-	User findByUsernameAndPassword(String username, String password);
+	Parametro findByIdparametro(int idparametro);
+	Parametro findByIdbambino(int idbambino);
 
 }
