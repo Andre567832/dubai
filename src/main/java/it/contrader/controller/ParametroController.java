@@ -47,15 +47,15 @@ public class ParametroController {
 		int saturazione = r.nextInt(10) + 90;
 		double temperatura = r.nextInt(4) + 34;
 		boolean pannolino = r.nextInt(4) > 2;
-		double stress;
-		controllastress(request, battito, saturazione, temperatura, pannolino);
+		double stress = controllastress(request, battito, saturazione, temperatura, pannolino);
 		LocalDate data = LocalDate.now();
 		LocalTime time = LocalTime.now();
+		service.insert(new ParametroDTO(0, peso, battito, saturazione, temperatura, stress, data, time, idbambino));
 		return new ParametroDTO();
 	}
 	
 	
-	private void controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
+	private double controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
 		int g =0;
 		if(!checkbattiti(request, battito)) g++;
 		if(!checkpannolino(request, pannolino)) g++;
@@ -84,6 +84,8 @@ public class ParametroController {
 			stress = 0;
 			break;
 		}
+		
+		return stress;
 	}
 
 
@@ -95,10 +97,10 @@ public class ParametroController {
 	}
 	
 	
-	@PostMapping("/rileva")
+	@GetMapping("/rileva")
 	public String rileva(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		rilevazione(request, idbambino);
-		return "forward:/readbambino";
+		return read(request, idbambino);
 	}
 	
 	
