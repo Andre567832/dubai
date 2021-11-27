@@ -45,10 +45,9 @@ public class PiantoService extends AbstractService<Parametro, ParametroDTO> {
 		int minG = 1, maxG = 10;
 		Random ranG = new Random();
 		int gonfioreAddominale = ranG.nextInt(maxG) + minG;
-
-		int minP = 1, maxP = 10;
-		Random ranP = new Random();
-		int pesoPannolino = ranP.nextInt(maxP) + minP;
+		
+		
+		int pesoPannolino = pannolino();
 
 
 		Parametro parametro = repository.findByIdparametro(id); 
@@ -74,4 +73,13 @@ public class PiantoService extends AbstractService<Parametro, ParametroDTO> {
 		if(motivi.equals("")) motivi += "\nSta probabilmente solo facendo i capricci";
 		return motivi;
 	}
+	
+	
+	public int pannolino() {
+		int minP = 1, maxP = 10;
+		Random ranP = new Random();
+		int pesoPannolino = ranP.nextInt(maxP) + minP;
+		return pesoPannolino;
+	}
+	
 }
