@@ -18,12 +18,36 @@
 </div>
 <div class="main">
     <%
-        List<BambinoDTO> bambini = (List<BambinoDTO>)  request.getSession().getAttribute("list");
+        List<BambinoDTO> bambini = (List<BambinoDTO>) request.getSession().getAttribute("list");
     %>
 
 <br>
 
-    <table>
-            <th>bambino</th>
+
+	<table>
+		<tr>
+			<th>Bambino</th>
+			<th>Opzioni</th>
+		</tr>
+		<%
+			for (BambinoDTO b : bambini) {
+		%>
+		<tr>
+			<td>
+					<%=b.getNome()%>
+			</td>
+			<td><a href=/parametro/analisibambino?idbambino=<%=b.getIdbambino()%>>Analisi</a>
+			</td>
+			<td><a href=/bambino/delete?id=<%=b.getIdbambino()%>>Delete</a>
+			</td>
+
+		</tr>
+		<%
+			}
+		%>
+	</table>
+	
+	
+	
 </body>
 </html>
