@@ -89,12 +89,12 @@ public class ParametroController {
 		System.out.println("anche qui");
 		Random r = new Random();
 	//	r.doubles(3.5, 4.5);
-		double peso = (r.nextDouble()/3) + 3.5;
+		double peso = (r.nextInt(5)/10.0) + 3.3;
 		int battito = r.nextInt(150) + 50;
 		int saturazione = r.nextInt(10) + 90;
 		double temperatura = r.nextInt(3) + 35;
 		boolean pannolino = r.nextInt(4) > 2;
-		double stress = controllastress(request, battito, saturazione, temperatura, pannolino);
+		int stress = controllastress(request, battito, saturazione, temperatura, pannolino);
 		LocalDate data = LocalDate.now();
 		LocalTime time = LocalTime.now();
 		service.insert(new ParametroDTO(0, peso, battito, saturazione, temperatura, stress, data, time, idbambino));
@@ -102,29 +102,29 @@ public class ParametroController {
 	}
 	
 	
-	private double controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
+	private int controllastress(HttpServletRequest request, int battito, int saturazione, double temperatura, boolean pannolino) {
 		int g =0;
 		if(!checkbattiti(request, battito)) g++;
 		if(!checkpannolino(request, pannolino)) g++;
 		if(!checktemperatura(request, temperatura)) g++;
 		if(!checksaturazione(request, saturazione)) g++;
 		
-		double stress;
+		int stress;
 		Random r = new Random();
 		switch(g) {
 		
 		
 		case 1:
-			stress = r.nextDouble()*40;
+			stress = r.nextInt(10)*4;
 			break;
 		case 2:
-			stress = r.nextDouble()*70;
+			stress = r.nextInt(10)*7;
 			break;
 		case 3:
-			stress = r.nextDouble()*90;
+			stress = r.nextInt(10)*9;
 			break;
 		case 4:
-			stress = r.nextDouble()*100;
+			stress = r.nextInt(10)*10;
 			break;
 			
 		default:

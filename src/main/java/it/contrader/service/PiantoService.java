@@ -57,23 +57,19 @@ public class PiantoService extends AbstractService<Parametro, ParametroDTO> {
 		double stressBambino = parametro.getStress();
 
 		if (espressioneCorporale<5 && battitoCardiaco<120 && stressBambino>70 ) 
-		{System.out.println("il bambino ha probabilmente sonno");
-		}
+		return "il bambino ha probabilmente sonno";
+		
 
 		if(espressioneCorporale>7 && gonfioreAddominale>5 && crampiAddominali<8 && crampiAddominali>4) 
-		{System.out.println("il bambino potrebbe avere le coliche");
-		}
+		return "il bambino potrebbe avere le coliche";
 
 		if(espressioneCorporale>=5 && gonfioreAddominale<5 && crampiAddominali>4 && succhiaLabbra>5)
-		{System.out.println("il bambino potrebbe avere fame");
-		}
+		return "il bambino potrebbe avere fame";
+		
 
 		if(espressioneCorporale>=5 && pesoPannolino>6)
-		{System.out.println("il pannolino è quasi pieno");
-		}
+		return "il pannolino è quasi pieno";
 
-
-		return "pianto";
-
+		return "";
 	}
 }
