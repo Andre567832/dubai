@@ -15,7 +15,7 @@
 <div class="divPrincipale">
 <h1 class="babyguard">BabyGuard</h1>
 <button class="bottoneprova" style="margin-left: 80%"><a href="parametro/rileva?idbambino="<%=parametro.getIdbambino()%>>IL TUO BOTTONE</a></button>
-<h1 class="stress">stress</h1>
+<h1 class="stress"><%= %></h1>
 <h1 class="stress">sonno</h1>
 <h1 class="stress">battito</h1>
 <h1 class="stress">peso</h1>
