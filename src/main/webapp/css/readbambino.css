@@ -5,11 +5,16 @@
 	
 }
 .imgPrincipale{
-	width: 500px;
-	height: 500px;
-	margin-left: 20%;
+	width: 400px;
+	height: 400px;
+	margin-left: 36%;
+	margin-top: -45%
 }
 
+.stress{
+	margin-left: 80%;
+	font-weight: bold;
+}
 .babyguard{
 	margin-left: 40%;
 }
@@ -44,7 +49,6 @@ top:0;
 bottom:0;
 height:100%;
 left:0;
-width:60px;
 overflow:hidden;
 -webkit-transition:width .05s linear;
 transition:width .05s linear;
@@ -91,8 +95,16 @@ font-size:18px;
 position:relative;
 display:table-cell;
 vertical-align:middle;
-width:190px;
-  font-family: 'Titillium Web', sans-serif;
+width:290px;
+font-family: 'Titillium Web', sans-serif;
+}
+
+.bottoneprova{
+	height: 100px;
+	width: 100px;
+	background-color: black;
+	color: white;
+	
 }
 
 .main-menu>ul.logout {
