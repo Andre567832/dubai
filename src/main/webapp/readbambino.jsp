@@ -9,19 +9,24 @@
 <title>Insert title here</title>
 <link href="/css/readbambino.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: red;">
 <% //BambinoDTO bambino=(BambinoDTO)request.getSession().getAttribute("dto"); %>
 <% ParametroDTO parametro =(ParametroDTO)request.getSession().getAttribute("dto"); %>
 <div class="divPrincipale">
-<h1 class="babyguard">BabyGuard</h1>
-<button class="bottoneprova" style="margin-left: 80%"><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">IL TUO BOTTONE</a></button>
-<h1 class="stress"><%= %></h1>
-<h1 class="stress">sonno</h1>
-<h1 class="stress">battito</h1>
-<h1 class="stress">peso</h1>
-<h1 class="stress">saturazione</h1>
+<div>
+	<h1 class="babyguard">BabyGuard</h1>
+</div>
 
+<div style="margin-left: 50%; display: flex;" >
+<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Quanto peso</a></button>
+<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Dimmi perche piangi</a></button>
+<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Misurami la frebre</a></button>
+<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
+</div>
+
+<div>
 <img alt="" src="https://media.istockphoto.com/vectors/baby-babbling-cute-baby-milestone-vector-id906874436?k=20&m=906874436&s=612x612&w=0&h=gzupGk4nAQgh6AGq-Q41bFlFwR0S4sct6CvEzCpCXe4=" class="imgPrincipale">
+</div>
 <nav class="main-menu">
             <ul>
                 <li>
@@ -29,7 +34,8 @@
                         <i class="fa fa-home fa-2x"></i>
                         <span class="nav-text">
                             Battito Cardiaco
-                            <%=parametro.getBattito()%>
+                            <br>   
+                           <h1 class="parametri"><%=parametro.getBattito()%> </h1>
                         </span>
                     </a>
                   
@@ -39,7 +45,9 @@
                         <i class="fa fa-laptop fa-2x"></i>
                         <span class="nav-text">
                             Saturazione
-                            <%=parametro.getSaturazione()%>
+                            <br>   
+                           <h1 class="parametri"><%=parametro.getSaturazione()%> </h1>
+                       
                         </span>
                     </a>
                     
@@ -49,7 +57,8 @@
                        <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
                             Temperatura
-                            <%=parametro.getTemperatura()%>
+                             <br>   
+                           <h1 class="parametri"><%=parametro.getTemperatura()%> </h1>
                         </span>
                     </a>
                     
@@ -57,9 +66,11 @@
                 <li class="has-subnav">
                     <a href="#">
                        <i class="fa fa-folder-open fa-2x"></i>
-                        <span class="nav-text">
+                        <span class="nav-text" style="">
                             Peso
-                            <%=parametro.getPeso()%>
+                             <br>   
+                           <h1 class="parametri"><%=parametro.getPeso()%> </h1>
+                           
                         </span>
                     </a>
                    
@@ -69,7 +80,9 @@
                         <i class="fa fa-bar-chart-o fa-2x"></i>
                         <span class="nav-text">
                             Stress
-                            <%=parametro.getStress()%>
+                             <br>   
+                           <h1 class="parametri"><%=parametro.getStress()%> </h1>
+                           
                         </span>
                     </a>
                 </li>
