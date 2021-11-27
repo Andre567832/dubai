@@ -160,6 +160,14 @@ public class ParametroController {
 		return read(request, idbambino);
 	}
 	
+	@GetMapping("/pannolino")
+	public String pannolino(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+		int p = piantoservice.pannolino();
+		request.getSession().setAttribute("id", idbambino);
+		request.getSession().setAttribute("pannolino", p);
+		return "pannolino";
+	}
+	
 	
 	@GetMapping("/getbattiti")
 	public String rilevaBattiti(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {

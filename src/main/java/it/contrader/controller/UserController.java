@@ -35,7 +35,8 @@ public class UserController {
 			request.getSession().setAttribute("list", bambinoservice.findByIduser(userDTO.getIduser()));
 
 
-			return "home";
+			return "redirect:/parametro/analisibambino?idbambino="
+			+ bambinoservice.findByIduser(userDTO.getIduser()).get(0).getIduser();
 			
 			
 		}catch (Exception e) {
