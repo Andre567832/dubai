@@ -9,7 +9,7 @@
 <title>BABYGUARD</title>
 <link href="/css/readbambino.css" rel="stylesheet">
 </head>
-<body style="background-color: #6495ed ;">
+<body class="img">
 <% //BambinoDTO bambino=(BambinoDTO)request.getSession().getAttribute("dto"); %>
 <% int id = (Integer) request.getSession().getAttribute("id"); %>
 <% String motivi = (String) request.getSession().getAttribute("motivi"); %>

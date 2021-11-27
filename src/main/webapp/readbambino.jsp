@@ -18,9 +18,7 @@
 </div>
 
 <div class="divBottoni" >
-<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Quanto peso</a></button>
 <button class="bottoneprova" ><a href="/parametro/pianto?idbambino=<%=parametro.getIdbambino()%>">Dimmi perche piangi</a></button>
-<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Misurami la frebre</a></button>
 <button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
 </div>
 
@@ -64,7 +62,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
+                    <a>
                        <i class="fa fa-folder-open fa-2x"></i>
                         <span class="nav-text" style="">
                             Peso
@@ -76,7 +74,7 @@
                    
                 </li>
                 <li>
-                    <a href="#">
+                    <a >
                         <i class="fa fa-bar-chart-o fa-2x"></i>
                         <span class="nav-text">
                             Stress
