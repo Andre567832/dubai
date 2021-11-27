@@ -98,7 +98,7 @@ public class ParametroController {
 	@PostMapping("/rileva")
 	public String rileva(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		rilevazione(request, idbambino);
-		return "readbambino";
+		return "forward:/readbambino";
 	}
 	
 	
