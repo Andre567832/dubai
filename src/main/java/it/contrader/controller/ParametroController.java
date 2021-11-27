@@ -137,7 +137,7 @@ public class ParametroController {
 	
 	@GetMapping("/pianto")
 	public String Pianto(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-//		request.getSession().setAttribute("dto", service.Pianto(idbambino));
+		request.getSession().setAttribute("motivi", piantoservice.pianto(idbambino));
 		//setAll(request);
 		return "perchePiangi";
 	}
