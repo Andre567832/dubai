@@ -19,7 +19,7 @@
 
 <div class="divBottoni" >
 <button class="bottoneprova" ><a href="/parametro/pianto?idbambino=<%=parametro.getIdbambino()%>">Dimmi perche piangi</a></button>
-<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
+<button class="bottoneprova" ><a href="/parametro/pannolino?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
 </div>
 
 <div class="divImg">
