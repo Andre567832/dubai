@@ -32,9 +32,6 @@
 
             <br>
             <br>
-        <p>Non sei ancora registrato?</p>
-
-        <a href="/registrati.jsp">Registrazione</a>
         </form>
 
 

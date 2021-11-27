@@ -14,6 +14,7 @@
 <% ParametroDTO parametro =(ParametroDTO)request.getSession().getAttribute("dto"); %>
 <div class="divPrincipale">
 <h1 class="babyguard">BabyGuard</h1>
+<button class="bottoneprova" style="margin-left: 80%">IL TUO BOTTONE</button>
 <img alt="" src="https://media.istockphoto.com/vectors/baby-babbling-cute-baby-milestone-vector-id906874436?k=20&m=906874436&s=612x612&w=0&h=gzupGk4nAQgh6AGq-Q41bFlFwR0S4sct6CvEzCpCXe4=" class="imgPrincipale">
 <div class="area"></div><nav class="main-menu">
             <ul>
