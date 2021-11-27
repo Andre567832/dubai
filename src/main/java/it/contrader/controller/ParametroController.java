@@ -138,6 +138,8 @@ public class ParametroController {
 	@GetMapping("/pianto")
 	public String Pianto(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		request.getSession().setAttribute("motivi", piantoservice.pianto(idbambino));
+		request.getSession().setAttribute("id", idbambino);
+		
 		//setAll(request);
 		return "perchePiangi";
 	}
@@ -148,7 +150,6 @@ public class ParametroController {
 		List<ParametroDTO> list = service.findByIdbambino(idbambino);
 	//	init(request, idbambino);
 		request.getSession().setAttribute("dto", list.get(list.size()-1));
-		System.out.println("arriva qui");
 		return "readbambino";
 	}
 	

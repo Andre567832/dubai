@@ -55,21 +55,23 @@ public class PiantoService extends AbstractService<Parametro, ParametroDTO> {
 
 		int battitoCardiaco = parametro.getBattito();
 		double stressBambino = parametro.getStress();
+		String motivi = "";
 
-		if (espressioneCorporale<5 && battitoCardiaco<120 && stressBambino>70 ) 
-		return "il bambino ha probabilmente sonno";
+		if (espressioneCorporale <5 && battitoCardiaco<120 && stressBambino>70 ) 
+			motivi += "\nil bambino ha probabilmente sonno";
 		
 
 		if(espressioneCorporale>7 && gonfioreAddominale>5 && crampiAddominali<8 && crampiAddominali>4) 
-		return "il bambino potrebbe avere le coliche";
+			motivi += "\nil bambino potrebbe avere le coliche";
 
 		if(espressioneCorporale>=5 && gonfioreAddominale<5 && crampiAddominali>4 && succhiaLabbra>5)
-		return "il bambino potrebbe avere fame";
+			motivi += "\nil bambino potrebbe avere fame";
 		
 
 		if(espressioneCorporale>=5 && pesoPannolino>6)
-		return "il pannolino è quasi pieno";
-
-		return "";
+			motivi +="\nil pannolino è quasi pieno";
+		
+		if(motivi.equals("")) motivi += "\nSta probabilmente solo facendo i capricci";
+		return motivi;
 	}
 }
