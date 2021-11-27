@@ -11,6 +11,9 @@ import java.util.stream.DoubleStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +26,15 @@ import it.contrader.dto.ParametroDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.service.BambinoService;
 import it.contrader.service.ParametroService;
+import it.contrader.service.PiantoService;
 
 
 /**
  * @author Edoardo Rosiello
  */
+@Configuration
+@EnableAsync
+@EnableScheduling
 @Controller
 @RequestMapping("/parametro")
 public class ParametroController {
@@ -37,12 +44,31 @@ public class ParametroController {
 	
 	@Autowired
 	private BambinoService bambinoservice;
+	@Autowired
+	private PiantoService piantoservice;
 
+/*
+	public void init(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+
+        Timer timer = new Timer();
+	        timer.scheduleAtFixedRate(new TimerTask() {
+	       
+           public void run() {
+		                             System.out.println("Processor starts running");
+		             
+
+	                 rilevazione(request, idbambino);
+
+		           
+		         }}, 0, 1000 * 4);//  The setting here will delay the fixed execution every day
+		     }
+	*/
+/*
 	private void rilevazioneAutomatica(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		
 		Timer t = new Timer();
 		
-		t.scheduleAtFixedRate(getrilevazione(request, idbambino), (long) 1000, (long) 10 * 1000);
+		t.scheduleAtFixedRate(getrilevazione(request, idbambino), (long) 1000, (long) 4 * 1000);
 		
 	}
 	
@@ -51,22 +77,22 @@ public class ParametroController {
 			
 			@Override
 			public void run() {
+				System.out.println("qui entra");
 				rilevazione(request, idbambino);
 			}
 		};
 		return t;
 	}
 
-
-
+*/
 	private void rilevazione(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-		
+		System.out.println("anche qui");
 		Random r = new Random();
 	//	r.doubles(3.5, 4.5);
 		double peso = (r.nextDouble()/3) + 3.5;
 		int battito = r.nextInt(150) + 50;
 		int saturazione = r.nextInt(10) + 90;
-		double temperatura = r.nextInt(4) + 34;
+		double temperatura = r.nextInt(3) + 35;
 		boolean pannolino = r.nextInt(4) > 2;
 		double stress = controllastress(request, battito, saturazione, temperatura, pannolino);
 		LocalDate data = LocalDate.now();
@@ -108,12 +134,21 @@ public class ParametroController {
 		
 		return stress;
 	}
+	
+	@GetMapping("/pianto")
+	public String Pianto(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+//		request.getSession().setAttribute("dto", service.Pianto(idbambino));
+		//setAll(request);
+		return "perchePiangi";
+	}
 
 
 	@GetMapping("/analisibambino")
 	public String read(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		List<ParametroDTO> list = service.findByIdbambino(idbambino);
+	//	init(request, idbambino);
 		request.getSession().setAttribute("dto", list.get(list.size()-1));
+		System.out.println("arriva qui");
 		return "readbambino";
 	}
 	
@@ -124,6 +159,21 @@ public class ParametroController {
 		return read(request, idbambino);
 	}
 	
+	
+	@GetMapping("/getbattiti")
+	public String rilevaBattiti(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+		rilevazione(request, idbambino);
+		int battiti = ((ParametroDTO)(request.getSession().getAttribute("dto"))).getBattito();
+		checkbattiti(request, battiti);
+		return "readbambino";
+	}
+	
+	@GetMapping("/getpeso")
+	public String rilevaPeso(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+		rilevazione(request, idbambino);
+		double peso = ((ParametroDTO)(request.getSession().getAttribute("dto"))).getPeso();
+		return "readbambino";
+	}
 	
 	@GetMapping("/gettemperatura")
 	public String rilevaTemperatura(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
@@ -139,6 +189,12 @@ public class ParametroController {
 		double temperaturaest = 1.0;
 		checktemperaturaesterna(request, temperaturaest);
 		return "readbambino";
+	}
+	
+	@GetMapping("/storico")
+	public String storico(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+		request.getSession().setAttribute("storico", service.findByIdbambino(idbambino));
+		return "storicorilevazioni";
 	}
 	
 	private boolean checktemperaturaesterna(HttpServletRequest request, double temperaturaest) {
@@ -167,21 +223,6 @@ public class ParametroController {
 		} 
 		return true;
 	}
-
-	@GetMapping("/getbattiti")
-	public String rilevaBattiti(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-		rilevazione(request, idbambino);
-		int battiti = ((ParametroDTO)(request.getSession().getAttribute("dto"))).getBattito();
-		checkbattiti(request, battiti);
-		return "readbambino";
-	}
-	
-	@GetMapping("/getpeso")
-	public String rilevaPeso(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-		rilevazione(request, idbambino);
-		double peso = ((ParametroDTO)(request.getSession().getAttribute("dto"))).getPeso();
-		return "readbambino";
-	}
 	
 	private boolean checkbattiti(HttpServletRequest request, int battiti) {
 		if(battiti < 85) {
@@ -208,11 +249,6 @@ public class ParametroController {
 	}
 
 
-	@GetMapping("/storico")
-	public String storico(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-		request.getSession().setAttribute("storico", service.findByIdbambino(idbambino));
-		return "storicorilevazioni";
-	}
 
 
 }
