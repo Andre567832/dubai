@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.DoubleStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,13 +38,32 @@ public class ParametroController {
 	@Autowired
 	private BambinoService bambinoservice;
 
+	private void rilevazioneAutomatica(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+		
+		Timer t = new Timer();
+		
+		t.scheduleAtFixedRate(getrilevazione(request, idbambino), (long) 1000, (long) 10 * 1000);
+		
+	}
 	
-	
-	private ParametroDTO rilevazione(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
+	private TimerTask getrilevazione(HttpServletRequest request, int idbambino) {
+		TimerTask t = new TimerTask() {
+			
+			@Override
+			public void run() {
+				rilevazione(request, idbambino);
+			}
+		};
+		return t;
+	}
+
+
+
+	private void rilevazione(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
 		
 		Random r = new Random();
 	//	r.doubles(3.5, 4.5);
-		double peso = r.nextDouble() + 2.5 + r.nextDouble();
+		double peso = (r.nextDouble()/3) + 3.5;
 		int battito = r.nextInt(150) + 50;
 		int saturazione = r.nextInt(10) + 90;
 		double temperatura = r.nextInt(4) + 34;
@@ -51,7 +72,7 @@ public class ParametroController {
 		LocalDate data = LocalDate.now();
 		LocalTime time = LocalTime.now();
 		service.insert(new ParametroDTO(0, peso, battito, saturazione, temperatura, stress, data, time, idbambino));
-		return new ParametroDTO();
+		
 	}
 	
 	
