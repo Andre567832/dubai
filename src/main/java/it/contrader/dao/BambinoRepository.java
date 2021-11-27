@@ -1,5 +1,7 @@
 package it.contrader.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +16,7 @@ public interface BambinoRepository extends CrudRepository<Bambino, Integer> {
 	
 	Bambino findByIdbambino(int idbambino);
 	
-	Bambino findByIduser(int iduser);
+	List<Bambino> findByIduser(int iduser);
 	
 
 }

@@ -2,6 +2,7 @@ package it.contrader.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.DoubleStream;
 
@@ -31,6 +32,9 @@ public class ParametroController {
 	
 	@Autowired
 	private ParametroService service;
+	
+	@Autowired
+	private BambinoService bambinoservice;
 
 	
 	
@@ -83,9 +87,10 @@ public class ParametroController {
 	}
 
 
-	@GetMapping("/nomemancante")
+	@GetMapping("/analisibambino")
 	public String read(HttpServletRequest request, @RequestParam("idbambino") int idbambino) {
-		request.getSession().setAttribute("dto", service.read(idbambino));
+		List<ParametroDTO> list = service.findByIdbambino(idbambino);
+		request.getSession().setAttribute("dto", list.get(list.size()-1));
 		return "readbambino";
 	}
 	

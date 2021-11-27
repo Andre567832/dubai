@@ -1,5 +1,7 @@
 package it.contrader.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,13 @@ public class BambinoService extends AbstractService<Bambino, BambinoDTO> {
 	@Autowired
 	private BambinoRepository repository;
 	
-	public BambinoDTO findByIduser(int iduser) {
-		return converter.toDTO(repository.findByIduser(iduser));
+	public List<BambinoDTO> findByIduser(int iduser) {
+		return converter.toDTOList(repository.findByIduser(iduser));
+	}
+	
+	@Override
+	public BambinoDTO read(long id) {
+		return converter.toDTO(repository.findByIdbambino((int) id));
 	}
 	
 }
