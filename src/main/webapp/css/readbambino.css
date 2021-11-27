@@ -13,7 +13,9 @@
 }
 
 .divImg{
-	margin-top: 3%;
+	    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .divBottoni{
 	margin-left:489px;
@@ -36,14 +38,15 @@
 	font-family: cursive;
 	text-align: left;
 }
-.babyguard{
-	margin-left: 20%;
-}
+
 
 .img{
+	
 	background-image: url(https://media.istockphoto.com/photos/baby-crying-picture-id151557041?b=1&k=20&m=151557041&s=170667a&w=0&h=I-oTvXwgHs_bHt8bmCcaBvYrLM_uIwVAo7niRjMuPtA=);
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: cover;
+	
 }
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 }
@@ -184,3 +187,45 @@ height: 100%;
   font-weight: 300;
   src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
 }
+
+.mario {
+	width: 250px;
+	height: 400px;
+	border-radius: 8px;
+	background-color:  #6495ed ;
+	opacity: 0.8 ;
+	display: flex; 
+	justify-content: flex-start;
+	flex-direction: column;
+	align-items: center;
+}
+
+.mario p {
+	color: #ff0000;
+	font-size: 16px;
+	width: 200px;
+	height: 48px;
+	background-color: #ccc;
+	margin-bottom: 4px;
+	border-radius: 8px;
+	padding: 8px;
+}
+
+.bottom {
+    display: flex;
+    width: 873px;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 284px;
+}
+
+.notifications {
+	height: 48px;
+	width: 250px;
+	
+}
+
+
+
+
+

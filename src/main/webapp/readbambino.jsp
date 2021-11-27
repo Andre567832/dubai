@@ -18,13 +18,49 @@
 </div>
 
 <div class="divBottoni" >
+<button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Aggiorna</a></button>
 <button class="bottoneprova" ><a href="/parametro/pianto?idbambino=<%=parametro.getIdbambino()%>">Dimmi perche piangi</a></button>
 <button class="bottoneprova" ><a href="/parametro/pannolino?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
 </div>
-
+ 
+<div class="bottom">
 <div class="divImg">
 <img alt="" src="https://media.istockphoto.com/vectors/baby-babbling-cute-baby-milestone-vector-id906874436?k=20&m=906874436&s=612x612&w=0&h=gzupGk4nAQgh6AGq-Q41bFlFwR0S4sct6CvEzCpCXe4=" class="imgPrincipale">
 </div>
+<div class="mario">
+
+<h2 class="notifications">Notifiche</h2>	
+
+<%String pan = (String) request.getSession().getAttribute("alert");  %>
+        <%String temp = (String) request.getSession().getAttribute("alerttemp");  %>
+        <%String sat = (String) request.getSession().getAttribute("alertsaturazione");  %>
+        <%String bat = (String) request.getSession().getAttribute("alertbattiti");  %>
+        <%String clima = (String) request.getSession().getAttribute("alertclima");  %>
+        <%request.getSession().removeAttribute("alert");%>
+        <%request.getSession().removeAttribute("alerttemp");%>
+        <%request.getSession().removeAttribute("alertsaturazione");%>
+        <%request.getSession().removeAttribute("alertbattiti");%>
+        <%request.getSession().removeAttribute("alertclima");%>
+        
+        
+		<%if (sat != null) { %>
+			<p><%=sat%></p>
+		<% }%>
+		<%if (bat != null) { %>
+			<p><%=bat%></p>
+		<% }%>
+		<%if (temp != null) { %>
+			<p><%=temp%></p>
+		<% }%>
+		<%if (clima != null) { %>
+			<p><%=clima%></p>
+		<% }%>
+		<%if (pan != null) { %>
+			<p><%=pan%></p>
+		<% }%></div>	
+</div>
+
+
 <nav class="main-menu">
             <ul>
                 <li>
@@ -67,7 +103,7 @@
                         <span class="nav-text" style="">
                             Peso
                              <br>   
-                           <h1 class="parametri"><%=parametro.getPeso()%> </h1>
+                           <h1 class="parametri"><%=Math.round(parametro.getPeso() * 100000d) / 10000d%></h1>
                            
                         </span>
                     </a>
@@ -87,31 +123,8 @@
                 
             </ul>
         </nav>
-        <%String pan = (String) request.getSession().getAttribute("alert");  %>
-        <%String temp = (String) request.getSession().getAttribute("alerttemp");  %>
-        <%String sat = (String) request.getSession().getAttribute("alertsaturazione");  %>
-        <%String bat = (String) request.getSession().getAttribute("alertbattiti");  %>
-        <%String clima = (String) request.getSession().getAttribute("alertclima");  %>
         
-		<%if (sat != null) { %>
-			<p><%=sat%></p>
-		<% }%>
-		<%if (bat != null) { %>
-			<p><%=bat%></p>
-		<% }%>
-		<%if (temp != null) { %>
-			<p><%=temp%></p>
-		<% }%>
-		<%if (clima != null) { %>
-			<p><%=clima%></p>
-		<% }%>
-		<%if (pan != null) { %>
-			<p><%=pan%></p>
-		<% }%>
-		<script>
-			
-		</script>
-
+		
 	</div>
 </body>
 </html>
