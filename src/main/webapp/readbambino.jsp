@@ -6,25 +6,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>BABYGUARD</title>
 <link href="/css/readbambino.css" rel="stylesheet">
 </head>
-<body style="background-color: red;">
+<body style="background-color: #6495ed ;">
 <% //BambinoDTO bambino=(BambinoDTO)request.getSession().getAttribute("dto"); %>
 <% ParametroDTO parametro =(ParametroDTO)request.getSession().getAttribute("dto"); %>
 <div class="divPrincipale">
-<div>
+<div style="margin-left: 30%">
 	<h1 class="babyguard">BabyGuard</h1>
 </div>
 
-<div style="margin-left: 50%; display: flex;" >
+<div class="divBottoni" >
 <button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Quanto peso</a></button>
 <button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Dimmi perche piangi</a></button>
 <button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Misurami la frebre</a></button>
 <button class="bottoneprova" ><a href="/parametro/rileva?idbambino=<%=parametro.getIdbambino()%>">Controllami il pannolino</a></button>
 </div>
 
-<div>
+<div class="divImg">
 <img alt="" src="https://media.istockphoto.com/vectors/baby-babbling-cute-baby-milestone-vector-id906874436?k=20&m=906874436&s=612x612&w=0&h=gzupGk4nAQgh6AGq-Q41bFlFwR0S4sct6CvEzCpCXe4=" class="imgPrincipale">
 </div>
 <nav class="main-menu">
@@ -58,7 +58,7 @@
                         <span class="nav-text">
                             Temperatura
                              <br>   
-                           <h1 class="parametri"><%=parametro.getTemperatura()%> </h1>
+                           <h1 class="parametri temperatura"><%=parametro.getTemperatura()%> </h1>
                         </span>
                     </a>
                     
@@ -89,7 +89,15 @@
                 
             </ul>
         </nav>
-        
+        <script >
+			let temperatura=document.querySelector(".temperatura");
+			console.log(temperatura.textContent);
+			let prova=parseFloat(temperatura.textContent);
+			if(prova>=32.0){
+				alert("Il bambino ha la temperatura alta");
+			}
+		</script>
+		
 </div>
 </body>
 </html>
